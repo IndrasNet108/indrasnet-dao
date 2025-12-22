@@ -1,0 +1,47 @@
+# Copyright (c) 2024 Captain Light. All rights reserved.
+# IndrasNet DAO Core (MVP) - AI-Powered Decentralized Autonomous Organization
+# Created by: Captain Light
+# Contact: info@indrasnet.ee
+# GitLab: https://gitlab.com/IndrasNet/indrasnet-dao-v3
+
+[workspace]
+members = [
+    "programs/indrasnet-dao-ai",
+]
+exclude = [
+    "scripts",
+    "analysis",
+    "programs/indrasnet-dao-core",
+    "programs/indrasnet-dao-orchestrator",
+    "programs/indrasnet-dao-security",
+    "programs/indrasnet-dao-partnerships",
+    "oss-components",
+]
+resolver = "2"
+
+[workspace.dependencies]
+curve25519-dalek = { version = "4.1.3" }
+
+[profile.release]
+overflow-checks = true
+lto = "fat"  # Full LTO for maximum size optimization
+codegen-units = 1
+opt-level = "z"  # Maximum size optimization (better than "s" for Solana)
+panic = "abort"
+strip = true
+debug = 0
+
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1
+
+[profile.dev]
+opt-level = 0
+debug = true
+
+# [patch.crates-io]
+# NOTE: Patches removed - causing conflicts with anchor-syn
+# syn = { version = "2.0.111" }
+# proc-macro2 = { version = "1.0.103" }
+

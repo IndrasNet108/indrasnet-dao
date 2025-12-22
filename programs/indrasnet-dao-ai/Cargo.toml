@@ -1,0 +1,39 @@
+[package]
+name = "indrasnet-dao-ai"
+version = "0.1.0"
+description = "IndrasNet DAO AI Program - AI Analysis, Collective AI, AI Functions"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "indrasnet_dao_ai"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+default = []
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+anchor-spl = { version = "0.32.1", default-features = false, features = ["token"] }
+indrasnet-dao-core = { path = "../indrasnet-dao-core", features = ["cpi"] }
+# Security program dependency for CPI (one-way: AI → Security, safe because Security doesn't depend on AI)
+indrasnet-dao-security = { path = "../indrasnet-dao-security", features = ["cpi"] }
+borsh = "0.10.4"
+hex = "0.4.3"
+sha2 = { version = "0.10", default-features = false }
+
+[dev-dependencies]
+solana-program-test = "1.18"
+solana-sdk = "1.18"
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"
+
+# Clippy lints configuration
+[lints.rust]
+unused_imports = "warn"
+unused_import_braces = "warn"
+unused_must_use = "warn"

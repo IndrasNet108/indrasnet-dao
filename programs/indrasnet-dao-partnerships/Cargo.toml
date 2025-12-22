@@ -1,0 +1,32 @@
+[package]
+name = "indrasnet-dao-partnerships"
+version = "0.1.0"
+description = "IndrasNet DAO Partnerships Program - Partnership Management, Analytics, Revenue Sharing"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "indrasnet_dao_partnerships"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+default = []
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+anchor-spl = { version = "0.32.1", default-features = false, features = ["token"] }
+indrasnet-dao-core = { path = "../indrasnet-dao-core", features = ["cpi"] }
+# Security dependency removed - using only CPI calls, no compile-time dependency needed
+# indrasnet-dao-security = { path = "../indrasnet-dao-security", features = ["cpi"] }
+borsh = "0.10.4"
+hex = "0.4.3"
+
+[dev-dependencies]
+solana-program-test = "1.18"
+solana-sdk = "1.18"
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"

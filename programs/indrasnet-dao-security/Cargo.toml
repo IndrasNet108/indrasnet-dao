@@ -1,0 +1,48 @@
+# Standalone Cargo.toml for Security module
+# This file is used for independent builds without workspace dependencies
+# 
+# Usage:
+#   cp Cargo.standalone.toml Cargo.toml
+#   cargo build --release
+#   cp Cargo.toml.backup Cargo.toml  # restore original
+
+[package]
+name = "indrasnet-dao-security"
+version = "0.1.0"
+description = "IndrasNet DAO Security Program - Security Monitoring, Operations, Compliance"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "indrasnet_dao_security"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build"]
+# NOTE: anchor-spl/idl-build removed - causes token_2022 conflict
+default = []
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+anchor-spl = { version = "0.32.1", default-features = false, features = ["token"] }
+# NOTE: idl-build feature removed - causes token_2022 conflict
+borsh = "0.10.4"
+hex = "0.4.3"
+# NOTE: No Core dependency in standalone build - uses IDL for CPI
+
+[dev-dependencies]
+solana-program-test = "1.18"
+solana-sdk = "1.18"
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"
+
+[lints.rust]
+unused_imports = "warn"
+unused_import_braces = "warn"
+unused_must_use = "warn"
+
+# NOTE: Profile settings are defined in workspace root Cargo.toml
+# Do not define profiles here to avoid conflicts

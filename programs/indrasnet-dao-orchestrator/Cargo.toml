@@ -1,0 +1,46 @@
+[package]
+name = "indrasnet-dao-orchestrator"
+version = "0.1.0"
+description = "IndrasNet DAO Orchestrator - Coordinates complex operations between subprograms via CPI"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "indrasnet_dao_orchestrator"
+
+[features]
+default = ["custom-panic"]
+no-log-ix-name = []
+anchor-debug = []
+no-idl = []
+no-entrypoint = []
+cpi = []
+custom-heap = []
+custom-panic = []
+idl-build = [
+    "anchor-lang/idl-build",
+    "anchor-spl/idl-build",
+    "no-entrypoint"
+]
+
+# Note: For tests, use --no-default-features --features "no-entrypoint" to avoid duplicate entrypoint symbol
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+anchor-spl = { version = "0.32.1", default-features = false, features = ["token"] }
+spl-math = "0.3.0"
+borsh = "0.10.4"
+hex = "0.4.3"
+
+# Subprograms for orchestration via CPI
+indrasnet-dao-core = { path = "../indrasnet-dao-core", features = ["cpi"] }
+indrasnet-dao-ai = { path = "../indrasnet-dao-ai", features = ["cpi"] }
+indrasnet-dao-partnerships = { path = "../indrasnet-dao-partnerships", features = ["cpi"] }
+indrasnet-dao-security = { path = "../indrasnet-dao-security", features = ["cpi"] }
+
+[dev-dependencies]
+solana-program-test = "1.17.0"
+solana-sdk = "1.17.0"
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"
+sha2 = "0.10"

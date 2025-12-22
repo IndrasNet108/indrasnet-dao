@@ -1,0 +1,5 @@
+# Clean publish bundle: only keep program sources + Cargo.toml
+programs/*/*
+!programs/*/src/
+!programs/*/src/**
+!programs/*/Cargo.toml

@@ -1,0 +1,29 @@
+[toolchain]
+anchor_version = "0.32.1"
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+indrasnet_dao_ai = "4sH3BtyuQhzqeYA7SiqFuPopg2szhNR3B5KAmQHn5YRC"
+indrasnet_dao_core = "8aVykRb29z7tHpMVXyGAvgxoyRi8AZeK3vSSsR7NS4Mr"
+indrasnet_dao_orchestrator = "7xQ7pxcZhg9Lwngtu4199kc85eL94pc27XcFyVMZE6RC"
+indrasnet_dao_partnerships = "FpDydZgGo9tezmKwCstSdzbZVv2JiGAnQhQLeT23gHHA"
+indrasnet_dao_security = "7qnYTjKghAhyJv8iRRbBp9p5bqZ4JVswz7xeDhVdyaZj"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cd tests && NODE_OPTIONS='--no-experimental-strip-types --max-old-space-size=4096 --expose-gc' ANCHOR_PROVIDER_URL=${ANCHOR_PROVIDER_URL:-http://127.0.0.1:8899} ANCHOR_WALLET=../authority-keypair.json node run-tests.js"
+
+[test]
+startup_wait = 30000
+shutdown_wait = 2000
+upgradeable = false

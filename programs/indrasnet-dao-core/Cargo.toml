@@ -1,0 +1,43 @@
+[package]
+name = "indrasnet-dao-core"
+version = "0.1.0"
+description = "IndrasNet DAO Core Program - Treasury, Governance, Voting, Grants, Mesh Groups"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "indrasnet_dao_core"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+default = []
+spl-math = ["dep:spl-math"]
+skip-ed25519-verify = []
+test-bpf = []
+program-test = ["skip-ed25519-verify"]  # Enable program-test and skip signature verify in tests
+
+[dependencies]
+sha2 = { version = "0.10", default-features = false }
+anchor-lang = { version = "0.32.1", features = ["init-if-needed", "allow-missing-optionals"] }
+anchor-spl = { version = "0.32.1", default-features = false, features = ["token"] }
+spl-math = { version = "0.3.0", default-features = false, optional = true }
+borsh = "0.10.4"
+hex = "0.4.3"
+# Security program dependency for CPI (one-way: Core → Security, safe because Security doesn't depend on Core)
+# NOTE: Temporarily disabled - Security in exclude, causes build issues
+# indrasnet-dao-security = { path = "../indrasnet-dao-security", features = ["cpi"] }
+
+[dev-dependencies]
+proptest = "1.4.0"
+solana-program-test = "1.18"
+solana-sdk = "1.18"
+tokio = { version = "1.0", features = ["full"] }
+anyhow = "1.0"
+# Mollusk SVM for integration tests
+# NOTE: Uncomment when dependency conflicts are resolved
+# mollusk-svm = "0.7"
+# mollusk-svm-bencher = "0.7"
