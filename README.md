@@ -10,6 +10,7 @@ and the current DevNet deployment.
 - `docs/deployment/program-ids.md` - DevNet Program IDs and verification commands
 - `docs/deployment/deployment-guide.md` - Deployment guide
 - `docs/architecture/overview.md` - High-level architecture overview
+- `docs/legal/` - Legal and compliance overview
 
 ## Quick DevNet Verification
 

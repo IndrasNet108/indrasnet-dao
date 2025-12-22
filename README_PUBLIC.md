@@ -9,6 +9,7 @@ This is a minimal public bundle for reviewing the deployed Solana programs on De
 - `docs/deployment/program-ids.md` — DevNet program IDs + verification commands
 - `docs/deployment/deployment-guide.md` — deployment steps
 - `docs/architecture/overview.md` — high‑level architecture summary
+- `docs/legal/` — legal and compliance overview
 
 ## Quick Verification (DevNet)
 
