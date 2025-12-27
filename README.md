@@ -1,4 +1,4 @@
-# IndrasNet DAO Core (DevNet Demo)
+# IndrasNet DAO - DevNet Demo
 
 This is a minimal, publication-ready package that demonstrates the on-chain programs
 and the current DevNet deployment.
